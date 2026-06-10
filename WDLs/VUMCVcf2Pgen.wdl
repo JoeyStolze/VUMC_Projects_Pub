@@ -87,7 +87,7 @@ workflow VUMCVcf2Pgen {
       }
     }
 
-    if(import_sex==true){
+    if(impute_sex==true){
       call GcpUtils.MoveOrCopyFiles as CopyFile {
         input:
           source_file1 = Vcf2Pgen_IS.output_pgen,
