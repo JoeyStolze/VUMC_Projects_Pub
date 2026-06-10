@@ -32,7 +32,7 @@ version 1.0
 ## - File copy operation to GCP is optional and only executed if a target folder is provided
 ## - If the original VCF file has chrX, it might be failed without sex information
 
-import "../../../tasks/vumc_biostatistics/GcpUtils.wdl" as GcpUtils
+import "https://raw.githubusercontent.com/shengqh/warp/refs/heads/develop/tasks/vumc_biostatistics/GcpUtils.wdl" as GcpUtils
 
 workflow VUMCVcf2Pgen {
   input {
