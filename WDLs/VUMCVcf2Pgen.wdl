@@ -88,7 +88,7 @@ workflow VUMCVcf2Pgen {
     }
 
     if(impute_sex==true){
-      call GcpUtils.MoveOrCopyFiles as CopyFile {
+      call GcpUtils.MoveOrCopyFiles as CopyFile2 {
         input:
           source_file1 = Vcf2Pgen_IS.output_pgen,
           source_file2 = Vcf2Pgen_IS.output_psam,
@@ -101,9 +101,9 @@ workflow VUMCVcf2Pgen {
   }
 
   output {
-    File output_pgen = select_first([CopyFile.output_file1, Vcf2Pgen.output_pgen])
-    File output_psam = select_first([CopyFile.output_file2, Vcf2Pgen.output_psam])
-    File output_pvar = select_first([CopyFile.output_file3, Vcf2Pgen.output_pvar])
+    File output_pgen = select_first([CopyFile.output_file1, Vcf2Pgen.output_pgen, CopyFile2.output_file1, Vcf2Pgen_IS.output_pgen])
+    File output_psam = select_first([CopyFile.output_file2, Vcf2Pgen.output_psam, CopyFile2.output_file2, Vcf2Pgen_IS.output_psam])
+    File output_pvar = select_first([CopyFile.output_file3, Vcf2Pgen.output_pvar, CopyFile2.output_file3, Vcf2Pgen_IS.output_pvar])
   }
 }
 
