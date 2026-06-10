@@ -43,7 +43,7 @@ workflow VUMCVcf2Pgen {
 
     String? target_gcp_folder
 
-    String? impute_sex
+    Boolean? impute_sex= false
   }
 
   meta {
