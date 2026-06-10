@@ -6,3 +6,6 @@ workflows:
   - name: VUMCAutoGVP
     subclass: WDL
     primaryDescriptorPath: /WDLs/AutoGVP_workflow.wdl
+  - name: VUMCVCF2Pgen_simple
+    subclass: WDL
+    primaryDescriptorPath: /WDLs/VUMCVcf2Pgen_simplified.wdl
