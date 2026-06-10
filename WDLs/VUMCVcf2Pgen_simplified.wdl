@@ -56,22 +56,11 @@ workflow VUMCVcf2Pgen {
     target_gcp_folder: "Optional GCP folder path to copy output files to after completion"
   }
 
-  if (impute_sex==false) {
-    call Vcf2Pgen {
-      input:
-       input_vcf = input_vcf,
-       input_vcf_index = input_vcf_index,
-       output_prefix = output_prefix,
-    }
-  }
-
-  if (impute_sex==true) {
-    call Vcf2Pgen_IS {
-      input:
-       input_vcf = input_vcf,
-       input_vcf_index = input_vcf_index,
-       output_prefix = output_prefix,
-    }
+  call Vcf2Pgen {
+   input:
+    input_vcf = input_vcf,
+    input_vcf_index = input_vcf_index,
+    output_prefix = output_prefix,
   }
 
   if(defined(target_gcp_folder)){
