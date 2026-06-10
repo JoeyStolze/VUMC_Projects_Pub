@@ -42,6 +42,8 @@ workflow VUMCVcf2Pgen {
     String output_prefix
 
     String? target_gcp_folder
+
+    String? impute_sex
   }
 
   meta {
@@ -55,11 +57,22 @@ workflow VUMCVcf2Pgen {
     target_gcp_folder: "Optional GCP folder path to copy output files to after completion"
   }
 
-  call Vcf2Pgen {
-    input:
-      input_vcf = input_vcf,
-      input_vcf_index = input_vcf_index,
-      output_prefix = output_prefix,
+  if (impute_sex==false) {
+    call Vcf2Pgen {
+      input:
+       input_vcf = input_vcf,
+       input_vcf_index = input_vcf_index,
+       output_prefix = output_prefix,
+    }
+  }
+
+  if (impute_sex==true) {
+    call Vcf2Pgen_IS {
+      input:
+       input_vcf = input_vcf,
+       input_vcf_index = input_vcf_index,
+       output_prefix = output_prefix,
+    }
   }
 
   if(defined(target_gcp_folder)){
@@ -101,11 +114,60 @@ task Vcf2Pgen {
 
   command <<<
 set -euo pipefail
-
 plink2 --vcf "~{input_vcf}" \
   --threads ~{cpu} \
   --make-pgen \
   --out "~{output_prefix}"
+
+if [ -f "~{output_prefix}.pgen" ]; then
+  echo "PGEN file created successfully"
+else
+  echo "Error: PGEN file was not created" >&2
+  exit 1
+fi
+  >>>
+
+  runtime {
+    docker: docker
+    memory: "~{memory_gb} GiB"
+    cpu: cpu
+    disks: "local-disk " + disk_size + " HDD"
+    preemptible: 3
+  }
+
+  output {
+    File output_pgen = "~{output_prefix}.pgen"
+    File output_pvar = "~{output_prefix}.pvar"
+    File output_psam = "~{output_prefix}.psam"
+  }
+}
+
+task Vcf2Pgen_IS {
+  input {
+    File input_vcf
+    File input_vcf_index
+
+    String output_prefix
+
+    Int memory_gb = 20
+    Int cpu = 8
+    Float disk_size_factor = 2.0
+    Int additional_disk_gb = 5
+
+    Int? disk_size_override
+
+    String docker = "shengqh/plink_1.9_2.0:20260526"
+  }
+
+  Int disk_size = select_first([disk_size_override, ceil(disk_size_factor * size(input_vcf, "GB")) + additional_disk_gb])
+
+  command <<<
+set -euo pipefail
+plink2 --vcf "~{input_vcf}" \
+  --threads ~{cpu} \
+  --make-pgen \
+  --out "~{output_prefix}"
+  --impute-sex
 
 if [ -f "~{output_prefix}.pgen" ]; then
   echo "PGEN file created successfully"
