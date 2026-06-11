@@ -106,7 +106,7 @@ plink2 --vcf "~{input_vcf}" \
   --threads ~{cpu} \
   --make-pgen \
   --out "~{output_prefix}"
-  --impute_sex
+  --lax-chrx-import
 
 if [ -f "~{output_prefix}.pgen" ]; then
   echo "PGEN file created successfully"
