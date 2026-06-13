@@ -105,7 +105,7 @@ set -euo pipefail
 plink2 --vcf "~{input_vcf}" \
   --threads ~{cpu} \
   --make-pgen \
-  --lax-chrx-import
+  --lax-chrx-import \
   --out "~{output_prefix}"
 
 if [ -f "~{output_prefix}.pgen" ]; then
