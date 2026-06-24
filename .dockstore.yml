@@ -9,3 +9,6 @@ workflows:
   - name: VUMCVCF2Pgen_simple
     subclass: WDL
     primaryDescriptorPath: /WDLs/VUMCVcf2Pgen_simplified.wdl
+  - name: VUMCPgen2Bed
+    subclass: WDL
+    primaryDescriptorPath: /WDLs/VUMCPgen2Bed.wdl
