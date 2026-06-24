@@ -115,6 +115,7 @@ plink2 ~{plink2_option} \
   --pgen ~{input_pgen} \
   --pvar ~{input_pvar} \
   --psam ~{input_psam} \
+  --max-alleles 2 \
   --make-bed \
   --out ~{output_prefix} 
 
