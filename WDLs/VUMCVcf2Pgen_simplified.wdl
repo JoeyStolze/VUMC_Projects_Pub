@@ -106,6 +106,7 @@ plink2 --vcf "~{input_vcf}" \
   --threads ~{cpu} \
   --make-pgen \
   --lax-chrx-import \
+  --max-alleles 2 \
   --out "~{output_prefix}"
 
 if [ -f "~{output_prefix}.pgen" ]; then
