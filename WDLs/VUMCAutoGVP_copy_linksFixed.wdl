@@ -87,24 +87,24 @@ workflow VUMCAutoGVP {
 
     String? vep_cache_folder
     File? vep_cache_tar_gz = "gs://vangard-workflow-result/autogvp/homo_sapiens_vep_104_GRCh38.tar.gz"
-    Float? vep_cache_uncompressed_gb
+    Float? vep_cache_uncompressed_gb = 20
 
     # Annovar database (tar.gz archive) for InterVar
     String? annovar_db_folder
     File? annovar_db_tar_gz = "gs://vangard-workflow-result/autogvp/humandb.20251111.tar.gz"
     String? annovar_db_tar_folder_name = "humandb"
-    Float? annovar_db_uncompressed_gb
+    Float? annovar_db_uncompressed_gb = 330
 
     # Annovar database (tar.gz archive) for gnomAD annotation
     String? annovar_gnomAD_folder
-    File? annovar_gnomAD_tar_gz = "gs://vangard-workflow-result/autogvp/annovar.20260602.tar.gz"
+    File? annovar_gnomAD_tar_gz
     String? annovar_gnomAD_tar_folder_name = "humandb_gnomad41"
     Float? annovar_gnomAD_uncompressed_gb
 
     # AutoPVS1 data
     String? autopvs_data_folder
     File? autopvs_data_tar_gz = "gs://vangard-workflow-result/autogvp/autoPVS1_data.tar.gz"
-    Float? autopvs_data_uncompressed_gb
+    Float? autopvs_data_uncompressed_gb = 5
 
     # ClinVar references for AutoGVP
     File clinvar_vcf = "gs://vangard-workflow-result/autogvp/clinvar_20260104.vcf.gz"
