@@ -79,38 +79,38 @@ workflow VUMCAutoGVP {
 
     # Gene annotation GTF file (e.g., GENCODE v38). If provided, uses local GTF parsing
     # instead of biomaRt (which can be unstable due to Ensembl server load).
-    File? gene_gtf
+    File? gene_gtf = "gs://vangard-workflow-result/autogvp/gencode.v49.annotation.gtf"
 
     # VEP references
-    File genome_fasta
-    File genome_fasta_fai
+    File genome_fasta = "gs://vangard-workflow-result/autogvp/GRCh38.p13.genome.fa"
+    File genome_fasta_fai = "gs://vangard-workflow-result/autogvp/GRCh38.p13.genome.fa.fai"
 
     String? vep_cache_folder
-    File? vep_cache_tar_gz
+    File? vep_cache_tar_gz = "gs://vangard-workflow-result/autogvp/homo_sapiens_vep_104_GRCh38.tar.gz"
     Float? vep_cache_uncompressed_gb
 
     # Annovar database (tar.gz archive) for InterVar
     String? annovar_db_folder
-    File? annovar_db_tar_gz
+    File? annovar_db_tar_gz = "gs://vangard-workflow-result/autogvp/humandb.20251111.tar.gz"
     String? annovar_db_tar_folder_name = "humandb"
     Float? annovar_db_uncompressed_gb
 
     # Annovar database (tar.gz archive) for gnomAD annotation
     String? annovar_gnomAD_folder
-    File? annovar_gnomAD_tar_gz
+    File? annovar_gnomAD_tar_gz = "gs://vangard-workflow-result/autogvp/annovar.20260602.tar.gz"
     String? annovar_gnomAD_tar_folder_name = "humandb_gnomad41"
     Float? annovar_gnomAD_uncompressed_gb
 
     # AutoPVS1 data
     String? autopvs_data_folder
-    File? autopvs_data_tar_gz
+    File? autopvs_data_tar_gz = "gs://vangard-workflow-result/autogvp/autoPVS1_data.tar.gz"
     Float? autopvs_data_uncompressed_gb
 
     # ClinVar references for AutoGVP
-    File clinvar_vcf
-    File selected_clinvar_submissions
-    File variant_summary
-    File submission_summary
+    File clinvar_vcf = "gs://vangard-workflow-result/autogvp/clinvar_20260104.vcf.gz"
+    File selected_clinvar_submissions = "gs://vangard-workflow-result/autogvp/ClinVar-selected-submissions_20260104.tsv"
+    File variant_summary = "gs://vangard-workflow-result/autogvp/variant_summary_20260104.txt.gz"
+    File submission_summary = "gs://vangard-workflow-result/autogvp/submission_summary_20260104.txt.gz"
 
     # Output prefix
     String target_prefix
