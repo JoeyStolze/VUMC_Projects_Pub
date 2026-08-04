@@ -98,7 +98,7 @@ workflow VUMCAutoGVP {
     # Annovar database (tar.gz archive) for gnomAD annotation
     String? annovar_gnomAD_folder
     File? annovar_gnomAD_tar_gz = "gs://vangard-workflow-result/autogvp/humandb.20251111.tar.gz"
-    String? annovar_gnomAD_tar_folder_name = "humandb_gnomad41"
+    String? annovar_gnomAD_tar_folder_name
     Float? annovar_gnomAD_uncompressed_gb = 330
 
     # AutoPVS1 data
