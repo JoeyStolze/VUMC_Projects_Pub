@@ -293,6 +293,7 @@ workflow VUMCAutoGVP {
         source_file5 = RunAnnovarGnomad.annovar_file,
         source_file6 = RunAutoPVS1.autopvs1_file,
         source_file7 = RunAutoGVP.autogvp_abridged_file,
+        source_file8 = RunAutoGVP.autogvp_full_file,
         is_move_file = false,
         target_gcp_folder = select_first([target_gcp_folder])
     }
@@ -306,6 +307,7 @@ workflow VUMCAutoGVP {
     File annovar_file = select_first([CopyFile.output_file5, RunAnnovarGnomad.annovar_file])
     File autopvs1_file = select_first([CopyFile.output_file6, RunAutoPVS1.autopvs1_file])
     File autogvp_abridged_file = select_first([CopyFile.output_file7, RunAutoGVP.autogvp_abridged_file])
+    File autogvp_full_file = select_first([CopyFile.output_file8, RunAutoGVP.autogvp_full_file])
   }
 }
 
